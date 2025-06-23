@@ -21,7 +21,6 @@ const config = {
   // Email Configuration
   email: {
     gmail: process.env.GMAIL_EMAIL,
-    appPassword: process.env.GMAIL_APP_PASSWORD,
     service: 'gmail'
   },
 
@@ -31,7 +30,9 @@ const config = {
     delayMax: parseInt(process.env.DELAY_MAX_MS) || 5000,
     humanTypingDelay: parseInt(process.env.HUMAN_TYPING_DELAY) || 100,
     maxApplicationsPerDay: parseInt(process.env.MAX_APPLICATIONS_PER_DAY) || 10,
-    cooldownBetweenActions: parseInt(process.env.COOLDOWN_BETWEEN_ACTIONS) || 3000
+    delayBetweenApplications: parseInt(process.env.DELAY_BETWEEN_APPLICATIONS) || 30, // minutes
+    cooldownBetweenActions: parseInt(process.env.COOLDOWN_BETWEEN_ACTIONS) || 3000,
+    senderName: process.env.SENDER_NAME || 'Job Seeker'
   },
 
   // Job Search Configuration
@@ -89,8 +90,7 @@ const validateConfig = () => {
     'linkedin.email',
     'linkedin.password', 
     'gemini.apiKey',
-    'email.gmail',
-    'email.appPassword'
+    'email.gmail'
   ];
 
   const missing = required.filter(path => {

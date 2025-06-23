@@ -11,7 +11,7 @@ class LinkedInBot {
     this.sessionId = randomstring.generate(8);
     this.linkedinService = new LinkedInService();
     this.geminiService = new GeminiService();
-    this.emailService = new EmailService();
+    this.emailService = new EmailService(this.linkedinService); // Pass LinkedIn service for browser sharing
     
     this.stats = {
       session: {
@@ -55,8 +55,8 @@ class LinkedInBot {
       // Initialize all services
       await this.linkedinService.initialize();
       
-      // TEMPORARILY SKIP EMAIL SERVICE - Focus on LinkedIn functionality first
-      logger.botAction('Skipping email service initialization for LinkedIn testing');
+      // Initialize email service (Gmail automation)
+      await this.emailService.initialize();
       
       // Test Gemini API
       const geminiWorking = await this.geminiService.testConnection();
